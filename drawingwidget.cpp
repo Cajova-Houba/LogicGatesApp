@@ -6,6 +6,19 @@ DrawingWidget::DrawingWidget(QWidget *parent) : QWidget(parent)
     gatePlaced = false;
 }
 
+void DrawingWidget::showEvent(QShowEvent *event)
+{
+    drawPin(signalPin);
+}
+
+void DrawingWidget::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    if (Qt::LeftButton == event->button() && signalPin.clickedOn(event->pos())) {
+        signalPin.flipOutputSignal();
+        drawPin(signalPin);
+    }
+}
+
 void DrawingWidget::mousePressEvent(QMouseEvent *event)
 {
     if (Qt::LeftButton == event->button()
@@ -61,11 +74,24 @@ void DrawingWidget::paintEvent(QPaintEvent *event)
     painter.drawImage(dirtyRect, image, dirtyRect);
 }
 
+void DrawingWidget::clearImage()
+{
+    image.fill(qRgb(255,255,255));
+    drawPin(signalPin);
+}
+
 void DrawingWidget::drawGate()
 {
+    clearImage();
     QPainter painter(&image);
-    image.fill(qRgb(255,255,255));
     andLogicGate.draw(painter);
+    update();
+}
+
+void DrawingWidget::drawPin(SignalPin &pin)
+{
+    QPainter painter(&image);
+    pin.draw(painter);
     update();
 }
 

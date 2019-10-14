@@ -8,7 +8,7 @@ class BaseLogicGate
 public:
 
     /**
-     * Users painter object to draw itself.
+     * Uses painter object to draw itself.
      *
      * @brief draw Draws itself.
      * @param painter Object used to draw itself.
@@ -31,7 +31,14 @@ public:
      */
     virtual bool clickAndSelect(QPoint clickPosition) = 0;
 
+    /**
+     * @brief calculateOutput Calculates output of this gate based on its inputs.
+     * @return Output of this gate.
+     */
+    virtual bool calculateOutput() = 0;
+
 protected:
+
     const int lineWidth = 20;
     const int width = 50;
     const int height = 100;

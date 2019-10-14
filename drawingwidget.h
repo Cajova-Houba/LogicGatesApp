@@ -6,6 +6,7 @@
 #include <QImage>
 #include <QSize>
 #include "andlogicgate.h"
+#include "signalpin.h"
 
 class DrawingWidget : public QWidget
 {
@@ -18,6 +19,19 @@ signals:
 public slots:
 
 protected:
+
+    /**
+     * @brief showEvent Kind of init. Draw signal pin(s).
+     * @param event
+     */
+    void showEvent(QShowEvent *event) override;
+
+    /**
+     * @brief mouseDoubleClickEvent Flip signal pint output on double click.
+     * @param event
+     */
+    void mouseDoubleClickEvent(QMouseEvent *event) override;
+
     /**
      * @brief mousePressEvent If some gate is selected, dragging starts.
      * @param event
@@ -49,11 +63,23 @@ protected:
     void paintEvent(QPaintEvent *event) override;
 
 private:
+
+    /**
+     * @brief clearImage Clears the buffer image and draws signal pin on it.
+     */
+    void clearImage();
+
     /**
      * @brief drawGate Draws gate on given base point.
      * @param basePoint Base point for logic gate.
      */
     void drawGate();
+
+    /**
+     * @brief drawPin Draws signal pin.
+     * @param pin Pin to be drawn.
+     */
+    void drawPin(SignalPin& pin);
 
     /**
      * @brief resizeImage Resize the image object to fit the widget size.
@@ -66,6 +92,7 @@ private:
     bool gatePlaced;
     QImage image;
     AndLogicGate andLogicGate;
+    SignalPin signalPin;
 };
 
 #endif // DRAWINGWIDGET_H

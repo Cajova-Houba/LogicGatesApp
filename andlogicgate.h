@@ -21,6 +21,8 @@ public:
      */
     void place(QPoint newPosition);
 
+    bool calculateOutput() override;
+
 private:
     bool selected;
 

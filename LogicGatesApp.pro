@@ -19,13 +19,15 @@ SOURCES += \
     andlogicgate.cpp \
     drawingwidget.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    signalpin.cpp
 
 HEADERS += \
     andlogicgate.h \
     baselogicgate.h \
     drawingwidget.h \
-    mainwindow.h
+    mainwindow.h \
+    signalpin.h
 
 FORMS += \
     mainwindow.ui

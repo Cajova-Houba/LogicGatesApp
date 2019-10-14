@@ -17,6 +17,8 @@ void AndLogicGate::draw(QPainter& painter)
 
     if(selected) {
         painter.setPen(QPen(QColor(255,0,0)));
+    } else {
+        painter.setPen(QPen(QColor(0,0,0)));
     }
 
     // gate body
@@ -45,6 +47,10 @@ void AndLogicGate::draw(QPainter& painter)
                      baseY + height/2,
                      baseX + lineWidth + width + lineWidth,
                      baseY + height/2);
+    painter.drawText(baseX + lineWidth + width + 10,
+                     baseY + height/2 - 10,
+                     calculateOutput() ? "1" : "0"
+                     );
 }
 
 bool AndLogicGate::clickedOn(QPoint clickPosition)
@@ -100,4 +106,9 @@ void AndLogicGate::place(QPoint newPosition)
         position.setX(newPosition.x());
         position.setY(newPosition.y());
     }
+}
+
+bool AndLogicGate::calculateOutput()
+{
+    return false;
 }
